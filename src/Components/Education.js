@@ -1,74 +1,62 @@
-import React, { Component } from "react";
+import React, { Component, useState, useEffect } from "react";
 import PreviewEducation from './PreviewEducation.js';
 
-class Education extends Component {
-    constructor(props){
-        super(props)
-            this.state = {
-                institution: '',
-                qualification: '',
-                dateCompleted: '',
-                subInstitution: '',
-                subQualification: '',
-                subDateCompleted: '',
-                isVisible: false
-            }
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
+/* used a functional component and one hook with object properties for each input field */
 
-    handleChange(event) {
-        this.setState({[event.target.name]: event.target.value})
-    }
-    
-    handleToggle = () => {
-        this.setState({ isVisible: !this.state.isVisible})
+function Education() {
+    //state variables
+    const [inputValues, setInputValues] = useState({institution: '',
+        qualification: '', dateCompleted: '', isVisible: false
+    });
+
+    const handleToggle = () => {
+        const value = !inputValues.isVisible
+        setInputValues({...inputValues, isVisible: value})
     };
-    
-    handleSubmit(event) {
-        this.setState({
-            subInstitution: this.state.institution,
-            subQualification: this.state.qualification,
-            subDateCompleted: this.state.dateCompleted
 
-        })
-        this.handleToggle();
-        event.preventDefault();
-    }                
+    function handleSubmit(){
+        //anything else? if not just set onSubmit to handletoggle. prev had ->subInstitutione tc
+        handleToggle();
+    }
 
-render() {
-    if (this.state.isVisible === false) {
-    return(
+    function handleChange(event){
+        const { name, value } = event.target;
+        setInputValues({...inputValues, [name]: value})
+        //expect could find a way to reuse these functions - to look at
+    }
+
+    if (inputValues.isVisible === false) {
+        return(
         <div className="sectionContainer">
         <h3>Education</h3>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={handleSubmit}>
             <div>
                 <label htmlFor="institution">Institution Name</label><br />
-                <input name="institution" value={this.state.institution} onChange={this.handleChange}></input>
+                <input name="institution" value={inputValues.institution} onChange={handleChange}></input>
             </div>
             <div>
                 <label htmlFor="qualification">Qualification</label><br />
-                <input name="qualification" value={this.state.qualification} onChange={this.handleChange}></input>
+                <input name="qualification" value={inputValues.qualification} onChange={handleChange}></input>
             </div>
             <div>
                 <label htmlFor="dateCompleted">Date Completed</label><br />
-                <input type="date" name="dateCompleted" value={this.state.dateCompleted} onChange={this.handleChange}></input>
+                <input type="date" name="dateCompleted" value={inputValues.dateCompleted} onChange={handleChange}></input>
             </div>
             <div>
                 <input type="submit" id="submitEdu"></input>
             </div>
         </form>
         </div>
-    );
-} else {
-    return(
-        <div className="previewDiv">
-            <PreviewEducation institution={this.state.institution} qualification={this.state.qualification} dateCompleted={this.state.dateCompleted} />
-            <button id="editGen" onClick={this.handleToggle}>Edit</button>
+        )
+    } else {
+        return(
+            <div className="previewDiv">
+            <PreviewEducation institution={inputValues.institution} qualification={inputValues.qualification} dateCompleted={inputValues.dateCompleted} />
+            <button id="editGen" onClick={handleToggle}>Edit</button>
         </div>
-    )
-}
-}
+        )
+    }
+
 }
 
 export default Education;

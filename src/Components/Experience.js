@@ -1,72 +1,56 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import PreviewExperience from './PreviewExperience.js';
 
-class Experience extends Component {
-    constructor(props){
-        super(props)
-            this.state = {
-                company: '',
-                position: '',
-                responsibilities: '',
-                dateFrom: '',
-                dateTo: '',
-                subCompany: '',
-                subPosition: '',
-                subResponsibilities: '',
-                subDateFrom: '',
-                subDateTo: '',
-                isVisible: false
-            }
-            this.handleChange = this.handleChange.bind(this);
-            this.handleSubmit = this.handleSubmit.bind(this);
-    }
+function Experience() {
+    const [inputValues, setInputValues] = useState({
+        company: '',
+        position: '',
+        responsibilities: '',
+        dateFrom: '',
+        dateTo: '',
+        isVisible: false
+    })
 
-    handleChange(event) {
-        this.setState({[event.target.name]: event.target.value})
-    }
-    
-    handleToggle = () => {
-        this.setState({ isVisible: !this.state.isVisible})
+    const handleToggle = () => {
+        const value = !inputValues.isVisible
+        setInputValues({...inputValues, isVisible: value})
     };
-    
-    handleSubmit(event) {
-        this.setState({
-            subCompany: this.state.company,
-            subPosition: this.state.position,
-            subResponsibilities: this.state.responsibilities,
-            subDateFrom: this.state.dateFrom,
-            subDateTo: this.state.dateTo
 
-        })
-        this.handleToggle();
-        event.preventDefault();
-    }                         
+    function handleSubmit(){
+        //anything else? if not just set onSubmit to handletoggle.
+        handleToggle();
+    }
 
-render() {
-    if (this.state.isVisible === false) {
+    function handleChange(event){
+        const { name, value } = event.target;
+        setInputValues({...inputValues, [name]: value})
+        //expect could find a way to reuse these functions - to look at
+    }
+
+    if (inputValues.isVisible === false) {
     return(
         <div className="sectionContainer">
         <h3>Experience</h3>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={handleSubmit}>
             <div>
                 <label htmlFor="companyName">Company Name</label><br />
-                <input name="company" value={this.state.company} onChange={this.handleChange}></input>
+                <input name="company" value={inputValues.company} onChange={handleChange}></input>
             </div>
             <div>
                 <label htmlFor="position">Position</label><br />
-                <input name="position" value={this.state.position} onChange={this.handleChange}></input>
+                <input name="position" value={inputValues.position} onChange={handleChange}></input>
             </div>
             <div>
                 <label htmlFor="responsibilities">Responsibilities</label><br />
-                <input name="responsibilities" value={this.state.responsibilities} onChange={this.handleChange}></input>
+                <input name="responsibilities" value={inputValues.responsibilities} onChange={handleChange}></input>
             </div>
             <div>
                 <label htmlFor="dateFrom">Start Date</label><br />
-                <input type="date" name="dateFrom" value={this.state.dateFrom} onChange={this.handleChange}></input>
+                <input type="date" name="dateFrom" value={inputValues.dateFrom} onChange={handleChange}></input>
             </div>
             <div>
                 <label htmlFor="dateTo">End Date</label><br />
-                <input type="date" name="dateTo" value={this.state.dateTo} onChange={this.handleChange}></input>
+                <input type="date" name="dateTo" value={inputValues.dateTo} onChange={handleChange}></input>
             </div>
             <div>
                 <input type="submit" id="submitExp"></input>
@@ -77,12 +61,15 @@ render() {
 } else {
     return(
         <div className="previewDiv">
-            <PreviewExperience company={this.state.company} position={this.state.position} responsibilities={this.state.responsibilities} dateFrom={this.state.dateFrom} dateTo={this.state.dateTo} />
-            <button id="editGen" onClick={this.handleToggle}>Edit</button>
+            <PreviewExperience company={inputValues.company} position={inputValues.position} responsibilities={inputValues.responsibilities} dateFrom={inputValues.dateFrom} dateTo={inputValues.dateTo} />
+            <button id="editGen" onClick={handleToggle}>Edit</button>
         </div>
     )
 }
 }
-}
+
+
+    
+
 
 export default Experience;
