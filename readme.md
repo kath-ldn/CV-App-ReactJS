@@ -31,7 +31,8 @@ To develop in future versions:
 * Form validation (either install package or write self);
 * Hide subsequent sections of form until current is complete, and add progress bar;
 * Ability to add more than one education/experience;
-* Add final submission button and 'thank you for your application'.
+* Add final submission button and 'thank you for your application';
+* Improve styling.
 
 ### Known Issues
 
