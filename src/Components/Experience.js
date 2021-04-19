@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
 import PreviewExperience from './PreviewExperience.js';
 
 function Experience() {
@@ -30,39 +30,37 @@ function Experience() {
     if (inputValues.isVisible === false) {
     return(
         <div className="sectionContainer">
-        <h3>Experience</h3>
-        <form onSubmit={handleSubmit}>
-            <div>
-                <label htmlFor="companyName">Company Name</label><br />
-                <input name="company" value={inputValues.company} onChange={handleChange}></input>
-            </div>
-            <div>
-                <label htmlFor="position">Position</label><br />
-                <input name="position" value={inputValues.position} onChange={handleChange}></input>
-            </div>
-            <div>
-                <label htmlFor="responsibilities">Responsibilities</label><br />
-                <input name="responsibilities" value={inputValues.responsibilities} onChange={handleChange}></input>
-            </div>
-            <div>
-                <label htmlFor="dateFrom">Start Date</label><br />
-                <input type="date" name="dateFrom" value={inputValues.dateFrom} onChange={handleChange}></input>
-            </div>
-            <div>
-                <label htmlFor="dateTo">End Date</label><br />
-                <input type="date" name="dateTo" value={inputValues.dateTo} onChange={handleChange}></input>
-            </div>
-            <div>
-                <input type="submit" id="submitExp"></input>
-            </div>
-        </form>
+            <h3>Experience</h3>
+            <form onSubmit={handleSubmit}>
+                <div className="inputAndLabel">
+                    <label htmlFor="companyName">Company Name</label><br />
+                    <input name="company" type="text" value={inputValues.company} onChange={handleChange}></input>
+                </div>
+                <div className="inputAndLabel">
+                    <label htmlFor="position">Position</label><br />
+                    <input name="position" type="text" value={inputValues.position} onChange={handleChange}></input>
+                </div>
+                <div className="inputAndLabel">
+                    <label htmlFor="responsibilities">Responsibilities</label><br />
+                    <textarea name="responsibilities" value={inputValues.responsibilities} onChange={handleChange}></textarea>
+                </div>
+                <div className="inputAndLabel">
+                    <label htmlFor="dateFrom">Start Date</label><br />
+                    <input type="date" name="dateFrom" value={inputValues.dateFrom} onChange={handleChange}></input>
+                </div>
+                <div className="inputAndLabel">
+                    <label htmlFor="dateTo">End Date</label><br />
+                    <input type="date" name="dateTo" value={inputValues.dateTo} onChange={handleChange}></input>
+                </div>
+                    <input type="submit" id="submitExp"></input>
+            </form>
         </div>
     );
 } else {
     return(
         <div className="previewDiv">
             <PreviewExperience company={inputValues.company} position={inputValues.position} responsibilities={inputValues.responsibilities} dateFrom={inputValues.dateFrom} dateTo={inputValues.dateTo} />
-            <button id="editGen" onClick={handleToggle}>Edit</button>
+            <button class="edit" onClick={handleToggle}>Edit</button>
         </div>
     )
 }

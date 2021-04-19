@@ -1,14 +1,12 @@
-import React, { Component } from "react";
+import React from "react";
 
 function PreviewEducation(props) {
     return(
-        <div>
-                <h3>Education</h3>
-                <div id="eduPreview">
-                    <div id="institutionPreview"> Institution: {props.institution} </div>
-                    <div id="qualificationPreview"> Qualification: {props.qualification} </div>
-                    <div id="dateCompletedPreview"> Date Completed: {props.dateCompleted} </div>
-                </div>
+        <div class="preview">
+            <h3>Education</h3>
+                <div class="prevData"> {props.institution} </div>
+                <div class="prevData"> {props.qualification} </div>
+                <div class="prevData"> {props.dateCompleted} </div>
         </div>
     );
 }

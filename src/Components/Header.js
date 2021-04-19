@@ -1,12 +1,12 @@
 function Header(props) {
     return (
-    <div>
-        <h1>Welcome to your application {props.user}</h1>
-    </div>
+    <header>
+        <h1>Welcome back {props.user}</h1>
+    </header>
     );
   }
 
-Header.defaultProps = { user: 'Jeremy'}
+Header.defaultProps = { user: ''}
   
 
 export default Header

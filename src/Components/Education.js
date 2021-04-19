@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from "react";
+import React, { useState } from "react";
 import PreviewEducation from './PreviewEducation.js';
 
 /* used a functional component and one hook with object properties for each input field */
@@ -28,31 +28,29 @@ function Education() {
     if (inputValues.isVisible === false) {
         return(
         <div className="sectionContainer">
-        <h3>Education</h3>
-        <form onSubmit={handleSubmit}>
-            <div>
-                <label htmlFor="institution">Institution Name</label><br />
-                <input name="institution" value={inputValues.institution} onChange={handleChange}></input>
-            </div>
-            <div>
-                <label htmlFor="qualification">Qualification</label><br />
-                <input name="qualification" value={inputValues.qualification} onChange={handleChange}></input>
-            </div>
-            <div>
-                <label htmlFor="dateCompleted">Date Completed</label><br />
-                <input type="date" name="dateCompleted" value={inputValues.dateCompleted} onChange={handleChange}></input>
-            </div>
-            <div>
-                <input type="submit" id="submitEdu"></input>
-            </div>
-        </form>
+            <h3>Education</h3>
+            <form onSubmit={handleSubmit}>
+                <div className="inputAndLabel">
+                    <label htmlFor="institution">Institution Name</label><br />
+                    <input name="institution" type="text" value={inputValues.institution} onChange={handleChange}></input>
+                </div>
+                <div className="inputAndLabel">
+                    <label htmlFor="qualification">Qualification</label><br />
+                    <input name="qualification" type="text" value={inputValues.qualification} onChange={handleChange}></input>
+                </div>
+                <div className="inputAndLabel">
+                    <label htmlFor="dateCompleted">Date Completed</label><br />
+                    <input type="date" name="dateCompleted" value={inputValues.dateCompleted} onChange={handleChange}></input>
+                </div>
+                    <input type="submit" id="submitEdu"></input>
+            </form>
         </div>
         )
     } else {
         return(
             <div className="previewDiv">
             <PreviewEducation institution={inputValues.institution} qualification={inputValues.qualification} dateCompleted={inputValues.dateCompleted} />
-            <button id="editGen" onClick={handleToggle}>Edit</button>
+            <button class="edit" onClick={handleToggle}>Edit</button>
         </div>
         )
     }

@@ -1,14 +1,12 @@
-import React, { Component } from "react";
+import React from "react";
 
 function PreviewGeneral(props) {
     return(
-        <div>
+        <div class="preview">
             <h3>General Information</h3>
-                <div id="generalPreview">
-                    <div id="namePreview">Name: {props.name}</div>   
-                    <div id="emailPreview">Email: {props.email}</div>   
-                    <div id="phonePreview">Phone: {props.phone}</div>   
-                </div>
+                    <div id="namePreview">{props.name}</div>   
+                    <div id="emailPreview">{props.email}</div>   
+                    <div id="phonePreview">{props.phone}</div>   
         </div>
     );
 }
